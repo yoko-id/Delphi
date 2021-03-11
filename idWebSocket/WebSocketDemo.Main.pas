@@ -27,14 +27,17 @@ type
     procedure Button1Click(Sender: TObject);
     procedure Button2Click(Sender: TObject);
   private
-    { Déclarations privées }
+    { DÃ©clarations privÃ©es }
     WebSocket: TWebSocket;
     procedure SendMessage(const Str: string);
     procedure OnWebSocketMessage(Sender: TWebSocket; const Str: string);
   public
-    { Déclarations publiques }
+    { DÃ©clarations publiques }
   end;
-
+const
+  StrIP = '10.10.10.105';
+  StrPort = '5414';
+  
 var
   Form1: TForm1;
 
@@ -49,7 +52,7 @@ end;
 
 procedure TForm1.Button2Click(Sender: TObject);
 begin
-  ShellExecute(0, 'open', 'http://127.0.0.1', nil, nil, SW_SHOW);
+  ShellExecute(0, 'open', 'http://' + Strip + ':' + Strport, nil, nil, SW_SHOW);
 end;
 
 procedure TForm1.IdHTTPServer1CommandGet(AContext: TIdContext;
@@ -93,7 +96,7 @@ begin
     + '  sendMessage(document.getElementById("text").value);'#10
     + '}'#10
     + 'function init() {'#10
-    + ' ws = new WebSocket("ws://127.0.0.1");'#10
+    + ' ws = new WebSocket("ws://' + Strip + ':' + Strport + '");'#10
     + ' ws.onopen = function() {'#10
     + '   log("WebSocket opened");'#10
     + '   sendMessage("Hello ?");'#10
